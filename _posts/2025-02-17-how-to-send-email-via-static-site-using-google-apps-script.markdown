@@ -154,3 +154,31 @@ Once everything is set up:
 
 By following these steps, you can easily integrate a contact form that sends emails directly from your static website using Google Apps Script!
 
+
+Google Apps Script has various limits based on quotas and execution restrictions. These limits depend on the Google account type (e.g., free Gmail vs. Google Workspace) and the specific service being used. Here’s a breakdown:
+
+---
+
+### **Email Sending Limits (`MailApp` & `GmailApp`)**
+
+| Account Type | Emails per Day |
+|-------------|---------------|
+| Gmail (free) | 100 |
+| Google Workspace (trial) | 500 |
+| Google Workspace (paid) | 1,500 |
+
+- **Attachments**: Max 25MB per email.
+- **Recipients per email**: 100 (including To, Cc, and Bcc).
+
+---
+
+### **How to Check Your Limits**
+You can monitor your usage via:
+1. **Google Apps Script Dashboard**:  
+   - Go to [Apps Script Dashboard](https://script.google.com/home/executions).
+   - View execution logs and quotas.
+2. **Google Cloud Console** (for Google Workspace users):  
+   - Navigate to **IAM & Admin → Quotas**.
+
+---
+
