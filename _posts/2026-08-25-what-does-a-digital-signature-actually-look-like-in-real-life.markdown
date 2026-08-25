@@ -4,7 +4,7 @@ title: What does a digital signature actually look like in real life?
 date: 2026-08-25 12:00:00 +0200
 description: A glass box and two keys — one that only locks, one that only opens. One page, one diagram, no jargon, and a signed PDF you can click and check.
 img: digital-signature-glass-box.webp
-fig-caption: The same note delivered twice — in Marko's open glass box and in his locked one.
+hide-cover: true # thumbnail on the homepage only
 tags: [Digital Signature, PKI, Security, Explainer]
 ---
 
