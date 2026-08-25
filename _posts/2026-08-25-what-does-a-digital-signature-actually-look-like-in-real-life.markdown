@@ -12,6 +12,6 @@ You've seen the stamp at the bottom of a signed PDF. But what *is* it — a pict
 
 **[Download the signed PDF](/assets/pdf/what-does-a-digital-signature-actually-look-like-in-real-life-signed.pdf)** — open it in a PDF reader that checks signatures (a browser only shows the picture) and click the stamp.
 
-<object data="/assets/pdf/what-does-a-digital-signature-actually-look-like-in-real-life-signed.pdf" type="application/pdf" width="100%" height="1000" style="max-width:100%;border:1px solid #ddd;">
-  <p>Your browser can't display the PDF inline. <a href="/assets/pdf/what-does-a-digital-signature-actually-look-like-in-real-life-signed.pdf">Download it</a> instead.</p>
-</object>
+<a href="/assets/pdf/what-does-a-digital-signature-actually-look-like-in-real-life-signed.pdf" title="Open the signed PDF"><img src="/assets/img/digital-signature-glass-box-page.webp" alt="The one-page article: a note delivered in Marko's open glass box (column A) and in his locked glass box (column B), how to read the stamp, what the lock proves and what it does not do" style="width:100%;height:auto;border:1px solid #ddd;"></a>
+
+*This is a picture of the page — as the page says, a browser only shows the picture. [Download the PDF](/assets/pdf/what-does-a-digital-signature-actually-look-like-in-real-life-signed.pdf) to open the box.*
