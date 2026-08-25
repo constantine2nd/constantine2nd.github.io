@@ -1,11 +1,11 @@
-title: Hello, world! I'm Marko Milić
+title: Marko Milić — software & security notes
 description: > # this means to ignore newlines until "baseurl:"
   Notes on software and security by Marko Milić — short, practical explainers
   on signatures, identity, e-mail and everyday engineering.
 permalink: ':title/'
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://constantine2nd.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-site-twitter: #if your site has a twitter account, enter it here
+site-twitter: milic_marko #if your site has a twitter account, enter it here
 
 # Author Settings
 author: Marko Milić # add your name
