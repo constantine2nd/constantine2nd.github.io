@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Spring Boot: Catch Breaking REST API Changes in the Pull Request, Not in Production"
+title: "Spring Boot: Catch Breaking REST API Changes in the PR, Not in Production"
 date: 2026-08-28 09:00:00 +0200
 description: Generate the OpenAPI spec with springdoc on every build, commit it, diff it in pull requests and let oasdiff fail the check - so a renamed response field never reaches a client you cannot see.
 img: spring-boot-breaking-api-changes.webp
