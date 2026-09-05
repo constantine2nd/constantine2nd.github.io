@@ -42,7 +42,7 @@
       "name": {{ site.author | jsonify }},
       "url": {{ "/about/" | absolute_url | jsonify }},
       "image": {{ site.author-img | prepend: "/assets/img/" | absolute_url | jsonify }},
-      "jobTitle": "Software developer",
+      "jobTitle": "Software engineer",
       "description": {{ site.about-author | jsonify }},
       "email": {{ site.social-email | prepend: "mailto:" | jsonify }},
       "sameAs": {{ author_same_as | jsonify }}

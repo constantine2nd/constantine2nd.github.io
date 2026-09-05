@@ -27,3 +27,7 @@
 .assistant-cta-btn:hover { background: #17233a; }
 .assistant-cta-hint { font-size: 13px; color: #6c7a89; margin-bottom: 0 !important; }
 @media (max-width: 600px) { .assistant-cta { flex-direction: column; gap: 10px; } }
+
+/* About page: strategic pillars list */
+.about-pillars { margin: 0 0 1.4em 0; padding-left: 1.2em; }
+.about-pillars li { margin-bottom: 0.5em; line-height: 1.6; }

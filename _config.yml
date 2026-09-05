@@ -1,7 +1,7 @@
 title: Marko Milić — software & security notes
 description: > # this means to ignore newlines until "baseurl:"
   Notes on software and security by Marko Milić — short, practical explainers
-  on signatures, identity, e-mail and everyday engineering.
+  on identity, security, AI and everyday engineering.
 permalink: ':title/'
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://constantine2nd.github.io" # the base hostname & protocol for your site, e.g. http://example.com
@@ -9,7 +9,7 @@ url: "https://constantine2nd.github.io" # the base hostname & protocol for your 
 # Author Settings
 author: Marko Milić # add your name
 author-img: marko-milic.jpg # add your photo
-about-author: I am a software developer focusing on a security. Always happy to implement good design. # add description
+about-author: Software engineer working on identity, security and AI. No technology fixes bad design, it only mitigates it. # add description
 social-facebook: # add your Facebook handle
 social-github: constantine2nd # add your Github handle
 social-linkedin: marko-milić-4332a81b9 # add your Linkedin handle
