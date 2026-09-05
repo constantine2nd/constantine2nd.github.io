@@ -5,13 +5,11 @@ description: > # this means to ignore newlines until "baseurl:"
 permalink: ':title/'
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://constantine2nd.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-site-twitter: milic_marko #if your site has a twitter account, enter it here
 
 # Author Settings
 author: Marko Milić # add your name
 author-img: marko-milic.jpg # add your photo
 about-author: I am a software developer focusing on a security. Always happy to implement good design. # add description
-social-x: milic_marko # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-github: constantine2nd # add your Github handle
 social-linkedin: marko-milić-4332a81b9 # add your Linkedin handle

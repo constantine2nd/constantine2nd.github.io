@@ -1,7 +1,6 @@
 {%- assign author_same_as = "" | split: "" -%}
 {%- if site.social-github %}{% capture gh %}https://github.com/{{ site.social-github }}{% endcapture %}{% assign author_same_as = author_same_as | push: gh %}{% endif -%}
 {%- if site.social-linkedin %}{% capture li %}https://www.linkedin.com/in/{{ site.social-linkedin }}{% endcapture %}{% assign author_same_as = author_same_as | push: li %}{% endif -%}
-{%- if site.social-x %}{% capture xx %}https://x.com/{{ site.social-x }}{% endcapture %}{% assign author_same_as = author_same_as | push: xx %}{% endif -%}
 {%- if page.layout == 'post' -%}
 <script type="application/ld+json">
 {
