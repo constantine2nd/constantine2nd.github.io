@@ -28,6 +28,17 @@
 .assistant-cta-hint { font-size: 13px; color: #6c7a89; margin-bottom: 0 !important; }
 @media (max-width: 600px) { .assistant-cta { flex-direction: column; gap: 10px; } }
 
+/* About page: the assistant demo videos (desktop above 640 px, phone below, like the widget) */
+.assistant-demo { margin: 30px 0; }
+.assistant-demo-title { margin: 0 0 12px; font-size: 20px; color: #263959; }
+.assistant-demo video { display: block; max-width: 100%; height: auto; margin: 0 auto; background: #f4f5f7; border: 1px solid #e6e8eb; border-radius: 6px; }
+.assistant-demo .assistant-demo-mobile { display: none; width: auto; max-height: 80vh; }
+.assistant-demo-text { margin: 10px 0 0; font-size: 14px; color: #6c7a89; }
+@media (max-width: 639px) {
+  .assistant-demo .assistant-demo-desktop { display: none; }
+  .assistant-demo .assistant-demo-mobile { display: block; }
+}
+
 /* About page: strategic pillars list */
 .about-pillars { margin: 0 0 1.4em 0; padding-left: 1.2em; }
 .about-pillars li { margin-bottom: 0.5em; line-height: 1.6; }

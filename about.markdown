@@ -32,6 +32,8 @@ description: Who writes this site and what it is about.
         </div>
       </aside>
 
+      {% include assistant-demo.html %}
+
       <p>Find me on <a href="https://github.com/{{site.social-github}}" rel="noopener" target="_blank">GitHub</a>, <a href="https://www.linkedin.com/in/{{site.social-linkedin}}" rel="noopener" target="_blank">LinkedIn</a> or by <a href="mailto:{{site.social-email}}">e-mail</a>.</p>
     </div>
   </div>

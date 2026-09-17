@@ -1,0 +1,19 @@
+<!-- The assistant in use: a desktop video on wide screens, a phone video below 640 px (the widget's own phone breakpoint).
+     preload="none": the hidden video is never downloaded, the visible one only when played. Recorded with
+     tesons-ai-platform/scripts/video (npm run video -- marko). -->
+<section class="assistant-demo" aria-labelledby="assistant-demo-title">
+  <h2 id="assistant-demo-title" class="assistant-demo-title">See it in action</h2>
+  <video class="assistant-demo-desktop" controls muted playsinline preload="none" width="1920" height="1080"
+         poster="{{ "/assets/video/marko-assistant-desktop.jpg" | prepend: site.baseurl }}"
+         aria-describedby="assistant-demo-text">
+    <source src="{{ "/assets/video/marko-assistant-desktop.mp4" | prepend: site.baseurl }}" type="video/mp4">
+  </video>
+  <video class="assistant-demo-mobile" controls muted playsinline preload="none" width="720" height="1560"
+         poster="{{ "/assets/video/marko-assistant-mobile.jpg" | prepend: site.baseurl }}"
+         aria-describedby="assistant-demo-text">
+    <source src="{{ "/assets/video/marko-assistant-mobile.mp4" | prepend: site.baseurl }}" type="video/mp4">
+  </video>
+  <p id="assistant-demo-text" class="assistant-demo-text">A short video without sound: the chat opens from the
+    <strong>💬</strong> button, answers a question about me, finds a time to talk and my CV, runs the quiz with a short
+    debrief at the end, and switches to German or Serbian.</p>
+</section>
