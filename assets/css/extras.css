@@ -42,3 +42,38 @@
 /* About page: strategic pillars list */
 .about-pillars { margin: 0 0 1.4em 0; padding-left: 1.2em; }
 .about-pillars li { margin-bottom: 0.5em; line-height: 1.6; }
+
+/* Measured posts: verdict box, before/after cards, bar chart, plan comparison (added 2026-09) */
+.post-verdict { margin: 26px 0; padding: 18px 22px; background: #f4f5f7; border: 1px solid #e6e8eb; border-left: 3px solid #263959; border-radius: 6px; }
+.post-verdict-label { margin: 0 0 6px; font-family: Lato, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6c7a89; }
+.post-verdict p { margin: 0 0 12px; }
+.post-verdict strong { color: #263959; }
+.post-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.post-facts li { margin: 0; padding: 4px 11px; font-family: Lato, sans-serif; font-size: 13px; color: #263959; background: #fff; border: 1px solid #e6e8eb; border-radius: 3px; }
+.post-facts li b { font-variant-numeric: tabular-nums; }
+.compare { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; margin: 24px 0; }
+@media (max-width: 640px) { .compare { grid-template-columns: minmax(0, 1fr); } }
+.compare-card { min-width: 0; padding: 16px 18px; background: #fff; border: 1px solid #e6e8eb; border-top: 3px solid #a9b3c1; border-radius: 6px; }
+.compare-card.bad { border-top-color: #c0461a; }
+.compare-card.good { border-top-color: #2e7d4f; }
+.compare-card h4 { margin: 0 0 4px; font-family: Lato, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6c7a89; }
+.compare-card code { font-size: 13px; }
+.compare-times { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin: 10px 0 4px; font-family: Lato, sans-serif; font-variant-numeric: tabular-nums; }
+.compare-times .from { font-size: 20px; color: #6c7a89; }
+.compare-times .arrow { font-size: 18px; color: #a9b3c1; }
+.compare-times .to { font-size: 30px; font-weight: 700; color: #263959; }
+.compare-card.bad .to { color: #c0461a; }
+.compare-card.good .to { color: #2e7d4f; }
+.compare-note { margin: 0; font-size: 14px; color: #6c7a89; }
+.compare-card pre { margin: 10px 0 0; font-size: 12.5px; overflow-x: auto; }
+.post-chart { margin: 24px 0; padding: 16px 18px 8px; background: #fff; border: 1px solid #e6e8eb; border-radius: 6px; }
+.post-chart-title { margin: 0 0 2px; font-family: Lato, sans-serif; font-size: 14px; font-weight: 700; color: #263959; }
+.post-chart-sub { margin: 0 0 8px; font-size: 13px; color: #6c7a89; }
+.post-chart-legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0 0 6px; font-family: Lato, sans-serif; font-size: 13px; color: #515151; }
+.post-chart-legend i { display: inline-block; width: 11px; height: 11px; margin-right: 6px; border-radius: 2px; vertical-align: -1px; }
+.post-chart svg { display: block; width: 100%; height: auto; }
+.post-chart svg text { font-family: Lato, sans-serif; }
+details.post-details { margin: 24px 0; background: #f4f5f7; border: 1px solid #e6e8eb; border-radius: 6px; }
+details.post-details > summary { cursor: pointer; padding: 12px 18px; font-family: Lato, sans-serif; font-size: 14px; font-weight: 700; color: #263959; }
+details.post-details > div { padding: 0 18px 14px; font-size: 15px; }
+details.post-details table { width: 100%; }
