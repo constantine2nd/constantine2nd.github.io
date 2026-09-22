@@ -45,12 +45,12 @@ The query above is not touched. Then the same two queries run again, the `SELECT
 
 <div class="compare">
 <div class="compare-card bad">
-<h4>SELECT *</h4>
+<h3>SELECT *</h3>
 <div class="compare-times"><span class="from">10.5 ms</span><span class="arrow">&rarr;</span><span class="to">123 ms</span></div>
 <p class="compare-note">About <b>12&times; slower</b>. It now reads, decodes and sends 10,800 JSON documents the screen never shows.</p>
 </div>
 <div class="compare-card good">
-<h4>The 6 needed columns</h4>
+<h3>The 6 needed columns</h3>
 <div class="compare-times"><span class="from">11.7 ms</span><span class="arrow">&rarr;</span><span class="to">12.9 ms</span></div>
 <p class="compare-note"><b>Unchanged.</b> It does not notice the new column at all.</p>
 </div>
@@ -58,8 +58,8 @@ The query above is not touched. Then the same two queries run again, the `SELECT
 
 <div class="post-chart">
 <p class="post-chart-title">Median time, before and after the migration</p>
-<div class="post-chart-legend"><span><i style="background:#a9b3c1"></i>before</span><span><i style="background:#263959"></i>after</span></div>
-<svg viewBox="0 0 640 214" role="img" aria-label="Median time before and after the migration, in milliseconds"><line x1="190.0" x2="190.0" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="190.0" y="211" text-anchor="middle" font-size="11" fill="#6c7a89">0 ms</text><line x1="263.1" x2="263.1" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="263.1" y="211" text-anchor="middle" font-size="11" fill="#6c7a89">25 ms</text><line x1="336.2" x2="336.2" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="336.2" y="211" text-anchor="middle" font-size="11" fill="#6c7a89">50 ms</text><line x1="409.2" x2="409.2" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="409.2" y="211" text-anchor="middle" font-size="11" fill="#6c7a89">75 ms</text><line x1="482.3" x2="482.3" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="482.3" y="211" text-anchor="middle" font-size="11" fill="#6c7a89">100 ms</text><line x1="555.4" x2="555.4" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="555.4" y="211" text-anchor="middle" font-size="11" fill="#6c7a89">125 ms</text><text x="0" y="28.0" font-size="13" font-weight="700" fill="#263959">SELECT &#42;</text><text x="0" y="43.0" font-size="11.5" fill="#6c7a89">sent to the client</text><rect x="190" y="10" width="30.7" height="18" rx="2" fill="#a9b3c1"><title>SELECT * before: 10.5 ms</title></rect><text x="226.7" y="23" font-size="12" fill="#263959">10.5 ms</text><rect x="190" y="32" width="359.5" height="18" rx="2" fill="#263959"><title>SELECT * after: 123.0 ms</title></rect><text x="555.5" y="45" font-size="12" font-weight="700" fill="#263959">123 ms</text><text x="0" y="90.0" font-size="13" font-weight="700" fill="#263959">the 6 needed columns</text><text x="0" y="105.0" font-size="11.5" fill="#6c7a89">sent to the client</text><rect x="190" y="72" width="34.2" height="18" rx="2" fill="#a9b3c1"><title>the 6 needed columns before: 11.7 ms</title></rect><text x="230.2" y="85" font-size="12" fill="#263959">11.7 ms</text><rect x="190" y="94" width="37.7" height="18" rx="2" fill="#263959"><title>the 6 needed columns after: 12.9 ms</title></rect><text x="233.7" y="107" font-size="12" font-weight="700" fill="#263959">12.9 ms</text><text x="0" y="152.0" font-size="13" font-weight="700" fill="#263959">EXPLAIN ANALYZE</text><text x="0" y="167.0" font-size="11.5" fill="#6c7a89">of the same SELECT &#42;</text><rect x="190" y="134" width="22.8" height="18" rx="2" fill="#a9b3c1"><title>EXPLAIN ANALYZE before: 7.8 ms</title></rect><text x="218.8" y="147" font-size="12" fill="#263959">7.8 ms</text><rect x="190" y="156" width="27.5" height="18" rx="2" fill="#263959"><title>EXPLAIN ANALYZE after: 9.4 ms</title></rect><text x="223.5" y="169" font-size="12" font-weight="700" fill="#263959">9.4 ms</text></svg>
+<div class="post-chart-legend"><span><i style="background:#7d8aa0"></i>before</span><span><i style="background:#263959"></i>after</span></div>
+<svg viewBox="0 0 640 214" role="img" aria-label="Median time before and after the migration, in milliseconds. SELECT * sent to the client: 10.5 ms before, 123 ms after. The 6 needed columns sent to the client: 11.7 ms before, 12.9 ms after. EXPLAIN ANALYZE of the same SELECT *: 7.8 ms before, 9.4 ms after."><line x1="190.0" x2="190.0" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="190.0" y="211" text-anchor="middle" font-size="11" fill="#5a6776">0 ms</text><line x1="263.1" x2="263.1" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="263.1" y="211" text-anchor="middle" font-size="11" fill="#5a6776">25 ms</text><line x1="336.2" x2="336.2" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="336.2" y="211" text-anchor="middle" font-size="11" fill="#5a6776">50 ms</text><line x1="409.2" x2="409.2" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="409.2" y="211" text-anchor="middle" font-size="11" fill="#5a6776">75 ms</text><line x1="482.3" x2="482.3" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="482.3" y="211" text-anchor="middle" font-size="11" fill="#5a6776">100 ms</text><line x1="555.4" x2="555.4" y1="6" y2="198" stroke="#e6e8eb" stroke-width="1"/><text x="555.4" y="211" text-anchor="middle" font-size="11" fill="#5a6776">125 ms</text><text x="0" y="28.0" font-size="13" font-weight="700" fill="#263959">SELECT &#42;</text><text x="0" y="43.0" font-size="11.5" fill="#5a6776">sent to the client</text><rect x="190" y="10" width="30.7" height="18" rx="2" fill="#7d8aa0"><title>SELECT * before: 10.5 ms</title></rect><text x="226.7" y="23" font-size="12" fill="#263959">10.5 ms</text><rect x="190" y="32" width="359.5" height="18" rx="2" fill="#263959"><title>SELECT * after: 123.0 ms</title></rect><text x="555.5" y="45" font-size="12" font-weight="700" fill="#263959">123 ms</text><text x="0" y="90.0" font-size="13" font-weight="700" fill="#263959">the 6 needed columns</text><text x="0" y="105.0" font-size="11.5" fill="#5a6776">sent to the client</text><rect x="190" y="72" width="34.2" height="18" rx="2" fill="#7d8aa0"><title>the 6 needed columns before: 11.7 ms</title></rect><text x="230.2" y="85" font-size="12" fill="#263959">11.7 ms</text><rect x="190" y="94" width="37.7" height="18" rx="2" fill="#263959"><title>the 6 needed columns after: 12.9 ms</title></rect><text x="233.7" y="107" font-size="12" font-weight="700" fill="#263959">12.9 ms</text><text x="0" y="152.0" font-size="13" font-weight="700" fill="#263959">EXPLAIN ANALYZE</text><text x="0" y="167.0" font-size="11.5" fill="#5a6776">of the same SELECT &#42;</text><rect x="190" y="134" width="22.8" height="18" rx="2" fill="#7d8aa0"><title>EXPLAIN ANALYZE before: 7.8 ms</title></rect><text x="218.8" y="147" font-size="12" fill="#263959">7.8 ms</text><rect x="190" y="156" width="27.5" height="18" rx="2" fill="#263959"><title>EXPLAIN ANALYZE after: 9.4 ms</title></rect><text x="223.5" y="169" font-size="12" font-weight="700" fill="#263959">9.4 ms</text></svg>
 </div>
 
 Before the migration the two queries cost the same, so nothing warned anyone. The table meanwhile grew from 52 MB to 1.2 GB. Over a real network, sending 21 MB instead of 1 MB per request widens the gap further.
@@ -70,7 +70,7 @@ Anyone investigating a slow query reaches for `EXPLAIN ANALYZE`. Here it reporte
 
 <div class="compare">
 <div class="compare-card">
-<h4>Before the migration</h4>
+<h3>Before the migration</h3>
 <pre><code>Sort
   -> Bitmap Heap Scan on api_log
        -> Bitmap Index Scan on
@@ -79,7 +79,7 @@ Buffers: shared hit=6699
 Execution Time: 7.8 ms</code></pre>
 </div>
 <div class="compare-card">
-<h4>After the migration</h4>
+<h3>After the migration</h3>
 <pre><code>Sort
   -> Bitmap Heap Scan on api_log
        -> Bitmap Index Scan on

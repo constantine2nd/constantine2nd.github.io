@@ -8,13 +8,13 @@ fig-caption: # Add figcaption (optional)
 tags: [Email, Google Apps Script]
 ---
 
-### **How to Send Email via Static Site Using Google Apps Script**
+## **How to Send Email via Static Site Using Google Apps Script**
 
 This approach leverages Google Apps Script to handle the form submission and send emails. Here's how to integrate it into your static site.
 
 ---
 
-### **1. Create the Google Apps Script Web App**
+## **1. Create the Google Apps Script Web App**
 
 1. **Go to the Google Apps Script Editor:**
    - Open [Google Apps Script](https://script.google.com).
@@ -61,7 +61,7 @@ function doPost(e) {
 
 ---
 
-### **2. Integrate the Form with the Static Site**
+## **2. Integrate the Form with the Static Site**
 
 Your static site will use AJAX (through jQuery) to submit the form data to the Google Apps Script web app and send the email.
 
@@ -128,7 +128,7 @@ $(function () {
 
 ---
 
-### **3. Testing the Form**
+## **3. Testing the Form**
 
 Once everything is set up:
 - Test the form on your static site.
@@ -137,7 +137,7 @@ Once everything is set up:
 
 ---
 
-### **4. Security Considerations**
+## **4. Security Considerations**
 
 1. **Protect Email Address:**
    - You should consider adding CAPTCHA (like reCAPTCHA) to prevent spam submissions.
@@ -147,7 +147,7 @@ Once everything is set up:
 
 ---
 
-### **Summary**
+## **Summary**
 
 - **Google Apps Script** acts as the backend to send emails.
 - **AJAX** is used to send form data from the static site to the Google Apps Script web app.
@@ -159,7 +159,7 @@ Google Apps Script has various limits based on quotas and execution restrictions
 
 ---
 
-### **Email Sending Limits (`MailApp` & `GmailApp`)**
+## **Email Sending Limits (`MailApp` & `GmailApp`)**
 
 | Account Type | Emails per Day |
 |-------------|---------------|
@@ -172,7 +172,7 @@ Google Apps Script has various limits based on quotas and execution restrictions
 
 ---
 
-### **How to Check Your Limits**
+## **How to Check Your Limits**
 You can monitor your usage via:
 1. **Google Apps Script Dashboard**:  
    - Go to [Apps Script Dashboard](https://script.google.com/home/executions).

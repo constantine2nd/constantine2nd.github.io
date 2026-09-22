@@ -4,14 +4,14 @@
 .site-nav a:hover { border-bottom-color: #263959; }
 .author-name a { color: inherit; text-decoration: none; }
 .back-link { margin: 0 0 10px; font-size: 14px; }
-.back-link a { color: #6c7a89; text-decoration: none; }
+.back-link a { color: #5a6776; text-decoration: none; }
 .back-link a:hover { color: #263959; }
 .post-tags { margin-top: 8px; }
-.post-tags .tag, .page-tag .tag { display: inline-block; margin: 0 6px 6px 0; padding: 2px 9px; font-size: 12px; color: #6c7a89; background: #f4f5f7; border-radius: 3px; text-decoration: none; }
+.post-tags .tag, .page-tag .tag { display: inline-block; margin: 0 6px 6px 0; padding: 2px 9px; font-size: 12px; color: #5a6776; background: #f4f5f7; border-radius: 3px; text-decoration: none; }
 .post-tags .tag:hover, .page-tag .tag:hover { color: #fff; background: #263959; }
 .post-nav { display: flex; justify-content: space-between; gap: 16px; margin: 28px 0 8px; padding-top: 18px; border-top: 1px solid #e6e8eb; }
 .post-nav a { flex: 1; max-width: 48%; color: #263959; text-decoration: none; font-family: "PT Serif", serif; font-size: 16px; line-height: 1.35; }
-.post-nav a span { display: block; font-family: Lato, sans-serif; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #6c7a89; margin-bottom: 4px; }
+.post-nav a span { display: block; font-family: Lato, sans-serif; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5a6776; margin-bottom: 4px; }
 .post-nav-next { text-align: right; margin-left: auto; }
 @media (max-width: 600px) { .post-nav { flex-direction: column; } .post-nav a { max-width: 100%; } .post-nav-next { text-align: left; } }
 
@@ -21,11 +21,11 @@
 .assistant-cta-body { flex: 1; }
 .assistant-cta-title { margin: 0 0 8px; font-size: 20px; color: #263959; }
 .assistant-cta-body p { margin: 0 0 10px; }
-.assistant-cta-examples { font-size: 14px; color: #6c7a89; line-height: 1.7; }
+.assistant-cta-examples { font-size: 14px; color: #5a6776; line-height: 1.7; }
 .assistant-cta-examples span { display: inline-block; margin: 0 4px 4px 0; padding: 2px 9px; background: #fff; border: 1px solid #e6e8eb; border-radius: 3px; color: #263959; }
 .assistant-cta-btn { display: inline-block; margin: 4px 0 10px; padding: 10px 18px; font-family: Lato, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: .5px; color: #fff; background: #263959; border: none; border-radius: 4px; cursor: pointer; transition: background .15s ease; }
 .assistant-cta-btn:hover { background: #17233a; }
-.assistant-cta-hint { font-size: 13px; color: #6c7a89; margin-bottom: 0 !important; }
+.assistant-cta-hint { font-size: 13px; color: #5a6776; margin-bottom: 0 !important; }
 @media (max-width: 600px) { .assistant-cta { flex-direction: column; gap: 10px; } }
 
 /* About page: the assistant demo videos (desktop above 640 px, phone below, like the widget) */
@@ -33,7 +33,7 @@
 .assistant-demo-title { margin: 0 0 12px; font-size: 20px; color: #263959; }
 .assistant-demo video { display: block; max-width: 100%; height: auto; margin: 0 auto; background: #f4f5f7; border: 1px solid #e6e8eb; border-radius: 6px; }
 .assistant-demo .assistant-demo-mobile { display: none; width: auto; max-height: 80vh; }
-.assistant-demo-text { margin: 10px 0 0; font-size: 14px; color: #6c7a89; }
+.assistant-demo-text { margin: 10px 0 0; font-size: 14px; color: #5a6776; }
 @media (max-width: 639px) {
   .assistant-demo .assistant-demo-desktop { display: none; }
   .assistant-demo .assistant-demo-mobile { display: block; }
@@ -45,7 +45,7 @@
 
 /* Measured posts: verdict box, before/after cards, bar chart, plan comparison (added 2026-09) */
 .post-verdict { margin: 26px 0; padding: 18px 22px; background: #f4f5f7; border: 1px solid #e6e8eb; border-left: 3px solid #263959; border-radius: 6px; }
-.post-verdict-label { margin: 0 0 6px; font-family: Lato, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6c7a89; }
+.post-verdict-label { margin: 0 0 6px; font-family: Lato, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #5a6776; }
 .post-verdict p { margin: 0 0 12px; }
 .post-verdict strong { color: #263959; }
 .post-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
@@ -56,19 +56,19 @@
 .compare-card { min-width: 0; padding: 16px 18px; background: #fff; border: 1px solid #e6e8eb; border-top: 3px solid #a9b3c1; border-radius: 6px; }
 .compare-card.bad { border-top-color: #c0461a; }
 .compare-card.good { border-top-color: #2e7d4f; }
-.compare-card h4 { margin: 0 0 4px; font-family: Lato, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6c7a89; }
+.compare-card h3 { margin: 0 0 4px; font-family: Lato, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #5a6776; }
 .compare-card code { font-size: 13px; }
 .compare-times { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin: 10px 0 4px; font-family: Lato, sans-serif; font-variant-numeric: tabular-nums; }
-.compare-times .from { font-size: 20px; color: #6c7a89; }
-.compare-times .arrow { font-size: 18px; color: #a9b3c1; }
+.compare-times .from { font-size: 20px; color: #5a6776; }
+.compare-times .arrow { font-size: 18px; color: #5a6776; }
 .compare-times .to { font-size: 30px; font-weight: 700; color: #263959; }
 .compare-card.bad .to { color: #c0461a; }
 .compare-card.good .to { color: #2e7d4f; }
-.compare-note { margin: 0; font-size: 14px; color: #6c7a89; }
+.compare-note { margin: 0; font-size: 14px; color: #5a6776; }
 .compare-card pre { margin: 10px 0 0; font-size: 12.5px; overflow-x: auto; }
 .post-chart { margin: 24px 0; padding: 16px 18px 8px; background: #fff; border: 1px solid #e6e8eb; border-radius: 6px; }
 .post-chart-title { margin: 0 0 2px; font-family: Lato, sans-serif; font-size: 14px; font-weight: 700; color: #263959; }
-.post-chart-sub { margin: 0 0 8px; font-size: 13px; color: #6c7a89; }
+.post-chart-sub { margin: 0 0 8px; font-size: 13px; color: #5a6776; }
 .post-chart-legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0 0 6px; font-family: Lato, sans-serif; font-size: 13px; color: #515151; }
 .post-chart-legend i { display: inline-block; width: 11px; height: 11px; margin-right: 6px; border-radius: 2px; vertical-align: -1px; }
 .post-chart svg { display: block; width: 100%; height: auto; }
@@ -77,3 +77,16 @@ details.post-details { margin: 24px 0; background: #f4f5f7; border: 1px solid #e
 details.post-details > summary { cursor: pointer; padding: 12px 18px; font-family: Lato, sans-serif; font-size: 14px; font-weight: 700; color: #263959; }
 details.post-details > div { padding: 0 18px 14px; font-size: 15px; }
 details.post-details table { width: 100%; }
+
+/* Accessibility (WCAG 2.2 AA, added 2026-09) */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip-link { position: absolute; top: 8px; left: 8px; z-index: 1000; padding: 10px 16px; font-family: Lato, sans-serif; font-size: 14px; font-weight: 700; color: #fff; background: #263959; border-radius: 4px; text-decoration: none; transform: translateY(-200%); }
+.skip-link:focus { transform: none; }
+main:focus { outline: none; }
+.pagination ul { list-style: none; padding: 0; }
+@media (max-width: 600px) { .site-nav a { padding: 6px 4px; } }
+/* Let posts and their tables shrink to the screen instead of pushing the page wider (1.4.10 Reflow) */
+.content-box > * { min-width: 0; }
+.wrap-content table th, .wrap-content table td, .wrap-content :not(pre) > code { overflow-wrap: anywhere; }
+/* Table headers: white on the light-blue gradient was ~1.6:1 */
+table thead th { color: #1a2b45; }
