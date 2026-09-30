@@ -1,0 +1,16 @@
+"Use keyset pagination, OFFSET is slow." I measured it. The honest answer: it depends who is reading the pages.
+
+A person clicking through a list rarely goes past page 10. On a 1,000,000-row PostgreSQL table, pages 1 to 11 cost OFFSET 4 to 10 buffers and keyset 4 or 5, a few hundredths of a millisecond either way. Keyset asks for a unique tiebreaker, an index per sort order, a cursor in the client, and no "go to page 37". For that reader it does not pay for itself.
+
+A machine reading every page, an export, a sync, another service, is a different reader:
+
+- Every page of 1,000,000 rows: OFFSET 56 s, keyset 2.5 s. Page k re-reads the k-1 pages before it, so the cost grows with the square of the table.
+- Other requests' data left in the shared cache after 30 s beside the walker: 56% with OFFSET, 100% with keyset.
+- Rows an export repeated while new rows arrived: 6,609 with OFFSET, 0 with keyset.
+
+Neither is the good one. They answer different questions.
+
+Full write-up with charts, the numbers behind every claim, and two scripts that reproduce them:
+https://constantine2nd.github.io/offset-or-keyset-it-depends-who-is-reading/
+
+#PostgreSQL #SQL #Performance #SoftwareEngineering

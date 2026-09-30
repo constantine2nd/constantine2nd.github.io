@@ -1,0 +1,9 @@
+<div class="post-table" tabindex="0" role="region" aria-label="Reading every page: time, rows read and buffers by table size and strategy">
+<table>
+<thead>
+<tr><th rowspan="2" scope="col">Every page of</th><th class="group bad" colspan="3" scope="colgroup">LIMIT / OFFSET</th><th class="group" colspan="2" scope="colgroup">Deferred join</th><th class="group good" colspan="3" scope="colgroup">Keyset</th></tr>
+<tr><th class="num first" scope="col">time</th><th class="num" scope="col">rows read</th><th class="num" scope="col">buffers</th><th class="num first" scope="col">time</th><th class="num" scope="col">buffers</th><th class="num first" scope="col">time</th><th class="num" scope="col">rows read</th><th class="num" scope="col">buffers</th></tr>
+</thead>
+<tbody><tr><th scope="row">100k rows</th><td class="num first">0.6 s</td><td class="num">5,150,000</td><td class="num">180,959</td><td class="num first">1.2 s</td><td class="num">329,491</td><td class="num first">0.2 s</td><td class="num">100,000</td><td class="num">3,886</td></tr><tr><th scope="row">300k rows</th><td class="num first">3.8 s</td><td class="num">45,450,000</td><td class="num">1,595,313</td><td class="num first">2.8 s</td><td class="num">1,371,220</td><td class="num first">0.7 s</td><td class="num">300,000</td><td class="num">11,652</td></tr><tr><th scope="row">1M rows</th><td class="num first">55.8 s</td><td class="num">501,500,000</td><td class="num">17,596,205</td><td class="num first">25.2 s</td><td class="num">5,920,987</td><td class="num first">2.5 s</td><td class="num">1,000,000</td><td class="num">38,834</td></tr></tbody>
+</table>
+</div>

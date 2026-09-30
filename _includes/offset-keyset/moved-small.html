@@ -1,0 +1,12 @@
+<div class="compare">
+<div class="compare-card bad">
+<h3>LIMIT / OFFSET</h3>
+<p class="compare-note">A row arrives: page 2 opens with <b>1 row the reader already saw</b>.<br>
+A row they saw is deleted: <b>1 row is never shown</b>.</p>
+</div>
+<div class="compare-card good">
+<h3>Keyset</h3>
+<p class="compare-note">Repeated <b>0</b>, skipped <b>0</b>. Page 2 is
+"after the last row you saw", and that row has not moved.</p>
+</div>
+</div>

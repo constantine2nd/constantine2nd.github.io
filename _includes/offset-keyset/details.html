@@ -1,0 +1,17 @@
+<details class="post-details">
+<summary>Measurement details</summary>
+<div markdown="1">
+
+| | |
+|---|---|
+| Machine | Laptop, 11th Gen Intel(R) Core(TM) i7-11390H @ 3.40GHz (8 threads), 15 GB RAM, NVMe SSD, Linux; CPU governor `powersave` |
+| PostgreSQL | 14.24, default settings (`shared_buffers` 128MB), local Unix-socket connection |
+| Table | 1,000,000 rows, 244 MB plus 52 MB of indexes; `created_at` has four rows a second, so ties are real |
+| One page | Page of 20; `EXPLAIN (ANALYZE, BUFFERS)`, median of 5 runs after one not counted, three such runs; rows read is every row the plan's scans produced, skipped ones included |
+| Every page | Pages of 1,000, in order, until one comes back short, in a PL/pgSQL loop (server-side: no network); time from running each page with every column turned into text, median of 3 walks; buffers and rows read from `EXPLAIN` of each page |
+| Other requests | Primary-key lookups, 4 clients, 30 s, on a 7,009-page table loaded into `shared_buffers` first; `pg_buffercache` after; medians of 3 runs, interleaved |
+| Moving data | pgbench writer, 200 changes a second (half new rows at the top, half random deletes), 5 ms pause between pages |
+| Measured | 2026-09-30; the two scripts above reproduce every number |
+
+</div>
+</details>

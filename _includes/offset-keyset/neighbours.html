@@ -1,0 +1,18 @@
+<div class="compare compare-3"><div class="compare-card ">
+<h3>nothing else running</h3>
+<div class="compare-times"><span class="to">100%</span></div>
+<p class="compare-note">of their table still in <code>shared_buffers</code> after 30 s.
+p95 0.033 ms, 149,041 lookups a second.</p>
+</div>
+<div class="compare-card bad">
+<h3>beside an OFFSET walker</h3>
+<div class="compare-times"><span class="to">56%</span></div>
+<p class="compare-note">of their table still in <code>shared_buffers</code> after 30 s.
+p95 0.041 ms, 129,994 lookups a second.</p>
+</div>
+<div class="compare-card good">
+<h3>beside a keyset walker</h3>
+<div class="compare-times"><span class="to">100%</span></div>
+<p class="compare-note">of their table still in <code>shared_buffers</code> after 30 s.
+p95 0.039 ms, 132,088 lookups a second.</p>
+</div></div>

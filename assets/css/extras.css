@@ -53,6 +53,8 @@
 .post-facts li b { font-variant-numeric: tabular-nums; }
 .compare { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; margin: 24px 0; }
 @media (max-width: 640px) { .compare { grid-template-columns: minmax(0, 1fr); } }
+.compare.compare-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 800px) { .compare.compare-3 { grid-template-columns: minmax(0, 1fr); } }
 .compare-card { min-width: 0; padding: 16px 18px; background: #fff; border: 1px solid #e6e8eb; border-top: 3px solid #a9b3c1; border-radius: 6px; }
 .compare-card.bad { border-top-color: #c0461a; }
 .compare-card.good { border-top-color: #2e7d4f; }
@@ -65,7 +67,32 @@
 .compare-card.bad .to { color: #c0461a; }
 .compare-card.good .to { color: #2e7d4f; }
 .compare-note { margin: 0; font-size: 14px; color: #5a6776; }
-.compare-card pre { margin: 10px 0 0; font-size: 12.5px; overflow-x: auto; }
+.compare-card pre { margin: 10px 0 10px; padding: 10px 12px; font-size: 12.5px; }
+/* the site's pre breaks anywhere, splitting keywords; scrolling instead would put the code out of reach of
+   the keyboard (WCAG 2.1.1). Wrap at spaces, and inside a word only when nothing else fits. */
+.compare-card pre, .compare-card pre code { white-space: pre-wrap; word-break: normal; overflow-wrap: anywhere; }
+.compare-list { margin: 4px 0 10px; padding-left: 18px; font-size: 14px; color: #515151; }
+.compare-list li { margin-bottom: 4px; }
+/* Tables in measured posts: the cards' frame and type instead of the site's grey grid */
+.post-table { margin: 24px 0; background: #fff; border: 1px solid #e6e8eb; border-radius: 6px; overflow-x: auto; }
+.post-table table { margin: 0; border: 0; background: #fff; font-family: Lato, sans-serif; font-variant-numeric: tabular-nums; }
+.post-table thead { background: none; border-bottom: 1px solid #e6e8eb; }
+.post-table th, .post-table td { padding: 8px 9px; border: 0; border-bottom: 1px solid #eef0f2; font-size: 14px; color: #263959; white-space: nowrap; overflow-wrap: normal; }
+.post-table thead th { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #5a6776; vertical-align: bottom; }
+.post-table tr:nth-child(even) { background: none; }
+.post-table tbody tr:last-child td { border-bottom: 0; }
+.post-table .num { text-align: right; }
+.post-table tbody th { font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none; color: #263959; text-align: left; }
+.post-table tbody th.num { text-align: right; }
+/* a table wider than the screen scrolls in its frame; the frame takes focus so the keyboard can scroll it */
+.post-table:focus-visible { outline: 2px solid #263959; outline-offset: 2px; }
+.post-table .first { border-left: 1px solid #e6e8eb; }
+.post-table th.group { text-align: center; border-top: 3px solid #a9b3c1; border-left: 1px solid #e6e8eb; }
+.post-table th.group.bad { border-top-color: #c0461a; }
+.post-table th.group.good { border-top-color: #2e7d4f; }
+.post-table td.wrap, .post-table th.wrap { white-space: normal; min-width: 7em; }
+@media (max-width: 1100px) { .post-table th, .post-table td { padding: 6px 7px; font-size: 13px; } .post-table thead th { font-size: 11px; letter-spacing: 0.5px; } }
+.post-table td b { color: #263959; }
 .post-chart { margin: 24px 0; padding: 16px 18px 8px; background: #fff; border: 1px solid #e6e8eb; border-radius: 6px; }
 .post-chart-title { margin: 0 0 2px; font-family: Lato, sans-serif; font-size: 14px; font-weight: 700; color: #263959; }
 .post-chart-sub { margin: 0 0 8px; font-size: 13px; color: #5a6776; }
@@ -90,3 +117,30 @@ main:focus { outline: none; }
 .wrap-content table th, .wrap-content table td, .wrap-content :not(pre) > code { overflow-wrap: anywhere; }
 /* Table headers: white on the light-blue gradient was ~1.6:1 */
 table thead th { color: #1a2b45; }
+
+/* Posts: code, code blocks and tables in the same quiet style as the cards (added 2026-09-30),
+   instead of the red pills, slate borders, break-anywhere code and grey striped grid */
+.article-page :not(pre) > code.highlighter-rouge, .article-page .compare-note code, .article-page td code {
+  padding: 0.05rem 0.35rem; font-size: 0.88em; color: #263959; background: #f4f5f7;
+  border: 1px solid #e6e8eb; border-radius: 3px; white-space: normal; word-break: normal; overflow-wrap: break-word;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.article-page div.highlighter-rouge { margin: 20px 0; padding: 0; border: 1px solid #e6e8eb; border-radius: 6px; background: #f7f8fa; color: #263959; font-weight: 400; }
+.article-page div.highlighter-rouge .highlight { background: none; }
+.article-page pre.highlight { margin: 0; padding: 12px 16px; font-size: 13px; line-height: 1.6; background: none;
+  white-space: pre-wrap; word-break: normal; overflow-wrap: anywhere; overflow: visible; }
+.article-page pre.highlight code { white-space: pre-wrap; word-break: normal; overflow-wrap: anywhere; }
+.article-page details.post-details table { margin: 4px 0 0; border: 0; background: none; font-size: 14px; }
+.article-page details.post-details thead { display: none; }
+.article-page details.post-details tr:nth-child(even) { background: none; }
+.article-page details.post-details td { padding: 7px 10px 7px 0; border: 0; border-bottom: 1px solid #e6e8eb; font-size: 14px; vertical-align: top; color: #515151; }
+.article-page details.post-details tr:last-child td { border-bottom: 0; }
+.article-page details.post-details td:first-child { width: 9.5em; font-family: Lato, sans-serif; font-weight: 700; color: #263959; }
+.article-page .wrap-content > table {
+  margin: 20px 0; border: 1px solid #e6e8eb; background: #fff; font-family: Lato, sans-serif; font-variant-numeric: tabular-nums; }
+.article-page .wrap-content > table thead { background: none; border-bottom: 1px solid #e6e8eb; }
+.article-page .wrap-content > table th { padding: 8px 10px; border: 0; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #5a6776; }
+.article-page .wrap-content > table td { padding: 8px 10px; border: 0; border-bottom: 1px solid #eef0f2; font-size: 14px; color: #263959; vertical-align: top; }
+.article-page .wrap-content > table tr:nth-child(even) { background: none; }
+/* Rouge marks characters its grammar does not know (`>` in HTML, `$$` in shell) as errors, dark red on
+   pink at 4.28:1. They are not errors in the code, and the pair fails 1.4.3: show them as plain code. */
+.article-page .highlight .err { color: inherit; background: none; }
