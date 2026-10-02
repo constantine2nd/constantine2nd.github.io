@@ -18,11 +18,12 @@ DATA = json.load(open(os.path.join(ROOT, "_data", "offset_keyset.json")))
 OUT = os.path.join(ROOT, "_includes", "offset-keyset")
 
 NAVY, GREY, RED, INK2, RULE = "#263959", "#7d8aa0", "#c0461a", "#5a6776", "#e6e8eb"
-COLOR = {"offset": RED, "keyset": NAVY, "deferred": GREY}
-NAME = {"offset": "LIMIT / OFFSET", "keyset": "keyset", "deferred": "deferred join"}
-SHORT = {"offset": "OFFSET", "keyset": "keyset", "deferred": "deferred"}
+GREEN = "#2e7d4f"
+COLOR = {"offset": RED, "keyset": NAVY, "deferred": GREY, "alone": GREEN}
+NAME = {"offset": "LIMIT / OFFSET", "keyset": "keyset", "deferred": "deferred join", "alone": "nothing else running"}
+SHORT = {"offset": "OFFSET", "keyset": "keyset", "deferred": "deferred", "alone": "alone"}
 # text in the series' colour must itself meet 4.5:1 on white: the grey line colour does not, so its label is darker
-LABEL = {"offset": RED, "keyset": NAVY, "deferred": INK2}
+LABEL = {"offset": RED, "keyset": NAVY, "deferred": INK2, "alone": GREEN}
 
 
 def num(v, digits=0):
@@ -63,6 +64,9 @@ def line_chart(series, title, sub, xlabels, aria, log_y=False, unit="", height=2
     if log_y:
         lo, hi = max(min(ys), 1e-3), max(ys)
         lo, hi = 10 ** math.floor(math.log10(lo)), 10 ** math.ceil(math.log10(hi))
+    elif unit == "%":
+        ticks_lin = [0, 25, 50, 75, 100]               # a share: the axis is the whole of it, no more
+        lo, hi = 0, 100
     else:
         ticks_lin = nice_ticks(max(ys))
         lo, hi = 0, ticks_lin[-1]
@@ -252,20 +256,39 @@ def walks():
 
 def neighbours():
     nb = DATA["neighbours"]
-    med = lambda c, k: statistics.median(x[k] for x in nb["runs"] if x["condition"] == c and x[k] is not None)
-    pages = nb["neighbour_pages"]
-    groups = [("alone", "nothing else running"), ("offset", "beside an OFFSET walker"),
-              ("keyset", "beside a keyset walker")]
+    P = nb["neighbour_pages"]
+    of = lambda c: [x for x in nb["runs"] if x["condition"] == c]
+    med = lambda c, k: statistics.median(x[k] for x in of(c) if x[k] is not None)
+    # the buffer count includes the table's free-space and visibility maps, so it can edge past its page count
+    share = lambda v: min(1.0, v / P)
+    held = lambda c: [share(x["held"]["median"]) for x in of(c)]
+    low = lambda c: share(min(x["held"]["min"] for x in of(c)))
+    groups = [("alone", "nothing else running"), ("offset", "beside an OFFSET walker"), ("keyset", "beside a keyset walker")]
     cards = []
     for c, lab in groups:
         cls = "bad" if c == "offset" else "good" if c == "keyset" else ""
+        hs = held(c)
+        span = f"{min(hs):.0%}" if f"{min(hs):.0%}" == f"{max(hs):.0%}" else f"{min(hs):.0%}–{max(hs):.0%}"
         cards.append(f"""<div class="compare-card {cls}">
 <h3>{esc(lab)}</h3>
-<div class="compare-times"><span class="to">{med(c, 'cached_after') / pages:.0%}</span></div>
-<p class="compare-note">of their table still in <code>shared_buffers</code> after {nb['seconds']} s.
-p95 {med(c, 'p95')} ms, {num(med(c, 'tps'))} lookups a second.</p>
+<div class="compare-times"><span class="to">{statistics.median(hs):.0%}</span></div>
+<p class="compare-note">of their table held in <code>shared_buffers</code> while it ran ({span} over {len(hs)} rounds,
+the lowest second {low(c):.0%}). p95 {med(c, 'p95')} ms, {num(med(c, 'tps'))} lookups a second.</p>
 </div>""")
     write("neighbours.html", '<div class="compare compare-3">' + "\n".join(cards) + "</div>")
+
+    first = {c: next(x for x in of(c) if x["held_per_second"]) for c, _ in groups}
+    n = min(len(first[c]["held_per_second"]) for c in first)
+    write("neighbours-seconds.html", line_chart(
+        {c: [share(v) * 100 for v in first[c]["held_per_second"][:n]] for c, _ in groups},
+        "Their table's share of shared_buffers, once a second",
+        "First round of each, 30 s. Beside keyset, the dip in the first two seconds is the walker's head start, "
+        "before the lookups begin: nothing was using their pages yet, and they came straight back.",
+        [f"{i} s" if i % 5 == 0 else None for i in range(n)],
+        "Their table's share of shared_buffers over 30 seconds. Alone: 100% throughout. Beside an OFFSET walker: "
+        f"falls from 100% to about {statistics.median(first['offset']['held_per_second'][10:]) / P:.0%} within ten "
+        "seconds and stays there. Beside a keyset walker: a dip in the first two seconds, then 100% throughout.",
+        unit="%", keys=["alone", "offset", "keyset"]))
 
 
 def moved_walk():
@@ -310,7 +333,7 @@ def details():
 | Table | 1,000,000 rows, {m['table_size']} plus {m['index_size']} of indexes; `created_at` has four rows a second, so ties are real |
 | One page | Page of {s['page_size']}; `EXPLAIN (ANALYZE, BUFFERS)`, median of 5 runs after one not counted, three such runs; rows read is every row the plan's scans produced, skipped ones included |
 | Every page | Pages of 1,000, in order, until one comes back short, in a PL/pgSQL loop (server-side: no network); time from running each page with every column turned into text, median of 3 walks; buffers and rows read from `EXPLAIN` of each page |
-| Other requests | Primary-key lookups, 4 clients, {nb['seconds']} s, on a {num(nb['neighbour_pages'])}-page table loaded into `shared_buffers` first; `pg_buffercache` after; medians of {len(nb['runs']) // 3} runs, interleaved |
+| Other requests | Primary-key lookups, 4 clients, {nb['seconds']} s, on a {num(nb['neighbour_pages'])}-page table loaded into `shared_buffers` first; `pg_buffercache` sampled once a second during each round; medians of {len(nb['runs']) // 3} rounds, interleaved; measured {nb['measured']} |
 | Moving data | pgbench writer, 200 changes a second (half new rows at the top, half random deletes), 5 ms pause between pages |
 | Measured | {DATA['started'][:10]}; the two scripts above reproduce every number |
 

@@ -9,7 +9,8 @@
 #
 # 1. Other requests beside a machine reading every page. Primary-key lookups on a table of their own,
 #    half the size of shared_buffers, loaded into it first; 30 seconds alone, then beside an OFFSET walker,
-#    then beside a keyset walker. pg_buffercache counts how much of their table is still cached after.
+#    then beside a keyset walker. pg_buffercache counts how much of their table is cached 25 s in, while
+#    both still run (counted after the lookups stop, it reads lower: nothing pulls their pages back then).
 # 2. A walk while rows arrive and leave: 100 new rows and 100 deletions a second, while a walker reads
 #    every page. Counted against the rows that were there for the whole walk: each should arrive once.
 #
@@ -72,21 +73,24 @@ cached() {
           AND b.reldatabase = (SELECT oid FROM pg_database WHERE datname = current_database())
           WHERE c.relname IN ('neighbour', 'neighbour_pkey')"
 }
-printf '%-22s %10s %10s %22s\n' "other requests" "tps" "latency" "their pages cached"
+printf '%-22s %10s %10s %26s\n' "other requests" "tps" "latency" "their pages cached, 25 s in"
 for cond in alone offset keyset; do
   $P -c "SELECT pg_prewarm('neighbour'), pg_prewarm('neighbour_pkey')" >/dev/null
-  before=$(cached)
   # the walker is cancelled when the lookups are done: that error is expected, and not shown
   if [ "$cond" != alone ]; then walker "$cond" 2>/dev/null & sleep 2; fi
-  out=$(pgbench -n -M prepared -c 4 -j 4 -T 30 -f "$T/lookup.sql" "$DB" 2>/dev/null)
-  after=$(cached)
+  pgbench -n -M prepared -c 4 -j 4 -T 30 -f "$T/lookup.sql" "$DB" > "$T/out.txt" 2>/dev/null &
+  bench=$!
+  sleep 25
+  during=$(cached)
+  wait $bench
+  out=$(cat "$T/out.txt")
   if [ "$cond" != alone ]; then
     $P -c "SELECT pg_cancel_backend(pid) FROM pg_stat_activity WHERE application_name = 'walker'" >/dev/null
     wait || true
   fi
   label=$cond; [ "$cond" != alone ] && label="beside $cond walker"
-  printf '%-22s %10s %10s %22s\n' "$label" "$(sed -n 's/^tps = \([0-9]*\).*/\1/p' <<<"$out")" \
-         "$(sed -n 's/^latency average = \(.*\)/\1/p' <<<"$out")" "$before -> $after of $PAGES"
+  printf '%-22s %10s %10s %26s\n' "$label" "$(sed -n 's/^tps = \([0-9]*\).*/\1/p' <<<"$out")" \
+         "$(sed -n 's/^latency average = \(.*\)/\1/p' <<<"$out")" "$during of $PAGES"
 done
 $P -c "DROP TABLE neighbour"
 

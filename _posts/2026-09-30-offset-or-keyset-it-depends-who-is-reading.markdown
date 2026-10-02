@@ -15,7 +15,7 @@ Every discussion of pagination seems to end the same way: `LIMIT ... OFFSET` is 
 <ul class="post-facts">
 <li>pages 1 to 11: <b>4-10 vs 4-5</b> buffers</li>
 <li>every page of 1M rows: <b>56 s vs 2.5 s</b></li>
-<li>other requests' data left in cache: <b>56% vs 100%</b></li>
+<li>other requests' data kept in cache: <b>85% vs 100%</b></li>
 <li>rows an export repeated: <b>6,609 vs 0</b></li>
 </ul>
 </div>
@@ -100,13 +100,17 @@ The usual advice for making OFFSET cheaper is the *deferred join*: skip over the
 
 ## Other requests notice
 
-A walk like this does not run alone. While it reads, the same database answers ordinary requests, and they all share one cache, PostgreSQL's `shared_buffers`. To see whether they notice, a stream of primary-key lookups ran against a table of their own, loaded into the cache first and small enough to stay there: alone, beside a machine walking `events` with OFFSET, and beside one using keyset.
+A walk like this does not run alone. While it reads, the same database answers ordinary requests, and they all share one cache, PostgreSQL's `shared_buffers`. To see whether they notice, a stream of primary-key lookups ran against a table of their own, loaded into the cache first and small enough to stay there: alone, beside a machine walking `events` with OFFSET, and beside one using keyset. Who held the cache was sampled once a second while each round ran.
 
 {% include offset-keyset/neighbours.html %}
 
-Beside the OFFSET walker, the lookups' table lost 44% of its pages from `shared_buffers` within 30 seconds. Beside the keyset walker it lost one page. PostgreSQL protects its cache from large sequential scans by giving them a small ring of 256 kB to cycle through ([buffer manager README](https://github.com/postgres/postgres/blob/REL_14_STABLE/src/backend/storage/buffer/README)). A walk through an index gets no such protection, and OFFSET walks the index from the top on every page, so it keeps pulling the whole table through the shared cache.
+Beside the OFFSET walker, the lookups' table held 82 to 85% of its pages while both ran, and at the worst second 75%. Beside the keyset walker it held all of them. Second by second, it looks like a tug of war: the walker pushes their pages out, the lookups pull them back, and it settles at the share the walker leaves them:
 
-What the lookups *felt* was smaller, and it would be wrong to overstate it. Their p95 latency went from 0.033 ms alone to 0.041 ms beside the OFFSET walker and 0.039 ms beside the keyset walker, and their throughput dropped by 11 to 13% with either. That part is the walker competing for CPU, and keyset pays it too. The evicted pages came back from the operating system's own cache: this laptop has 15 GB of memory and the whole database fits in it. On a server whose data does not fit in memory, or whose storage is a network disk, those pages would come from storage instead. That case was not measured here.
+{% include offset-keyset/neighbours-seconds.html %}
+
+Both walkers read the whole table, so why only OFFSET? Not because its pages get hotter: under either walker alone, the walked table's pages sat at an average usage count of about 0.5 to 0.7. It is the misses. OFFSET re-reads the table from the top for every page, and the table is twice the size of the cache, so almost every read needs a new buffer: PostgreSQL allocated 115,887 buffers a second for the OFFSET walker, against 13,579 for keyset. Each allocation moves the cache's clock sweep, and the sweep lowers the usage count of every buffer it passes, the lookups' included. Eight and a half times the sweep is eight and a half times the pressure on everyone else's pages. PostgreSQL protects its cache from large sequential scans by giving them a small ring of 256 kB to cycle through ([buffer manager README](https://github.com/postgres/postgres/blob/REL_14_STABLE/src/backend/storage/buffer/README)); a walk through an index gets no such protection.
+
+What the lookups *felt* was smaller, and it would be wrong to overstate it. Their p95 latency went from 0.043 ms alone to 0.061 ms beside the OFFSET walker and 0.052 ms beside the keyset walker, and their throughput dropped by 23% and 15%. Part of that is the walker competing for CPU, which keyset pays too. The evicted pages came back from the operating system's own cache: this laptop has 15 GB of memory and the whole database fits in it. On a server whose data does not fit in memory, or whose storage is a network disk, those pages would come from storage instead. That case was not measured here.
 
 ## When the data moves during an export
 
@@ -162,3 +166,5 @@ dropdb pagination_demo
 The second needs `pgbench` and runs the two experiments that need two sessions at once: other requests beside a walker, and a walk while rows change. It creates the `pg_prewarm` and `pg_buffercache` extensions to load and count the cache. `psql -X` skips your personal `~/.psqlrc`; add `-h <host> -U <user>` if your PostgreSQL is not local.
 
 {% include offset-keyset/details.html %}
+
+<p class="post-correction"><b>Corrected on 2 October 2026.</b> The first version said the lookups' table kept 56% of its pages beside the OFFSET walker. That was counted just after the lookups stopped, with the walker still running, when nothing pulls their pages back and the walker clears them fast. Sampled once a second while both ran, the share is 82 to 85%. The direction and the conclusion are unchanged; the size was overstated. The section above is re-measured, with the cache sampled during every round, and now explains why it happens.</p>

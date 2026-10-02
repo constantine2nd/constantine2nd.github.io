@@ -5,7 +5,7 @@ A person clicking through a list rarely goes past page 10. On a 1,000,000-row Po
 A machine reading every page, an export, a sync, another service, is a different reader:
 
 - Every page of 1,000,000 rows: OFFSET 56 s, keyset 2.5 s. Page k re-reads the k-1 pages before it, so the cost grows with the square of the table.
-- Other requests' data left in the shared cache after 30 s beside the walker: 56% with OFFSET, 100% with keyset.
+- Other requests' data kept in the shared cache while the walker ran: about 85% with OFFSET, 100% with keyset.
 - Rows an export repeated while new rows arrived: 6,609 with OFFSET, 0 with keyset.
 
 Neither is the good one. They answer different questions.
