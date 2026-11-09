@@ -43,4 +43,5 @@ msg = "Five terms under the hood of an AI agent"
 w = d.textlength(msg, font=bold(54))
 d.text(((1920 - w) / 2, 910), msg, font=bold(54), fill="#cfe0ff")
 im.save(os.path.join(ROOT, "assets", "img", "five-terms-ai-agent.webp"), quality=90)
+im.save(os.path.join(ROOT, "_tools", "five-terms-linkedin.png"))
 print("wrote assets/img/five-terms-ai-agent.webp")

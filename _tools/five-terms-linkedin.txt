@@ -1,0 +1,16 @@
+A model on its own is a conversation partner. What turns it into an agent that plans, writes code and opens the pull request is five pieces around it:
+
+- AGENTS.md: how this project works, read every session.
+- Agent skills: how to do a kind of task, loaded only when the request matches.
+- MCP: how the agent reaches tools and data. 3 agents and 4 tools need 12 custom connectors, or 7 with MCP.
+- A2A: how one agent hands work to another, through an agent card.
+- Subagents: work too big for one context, split into children that return only a summary.
+
+Put them side by side and they are one idea: the context window is the scarce resource, and each term decides what gets into it, and when.
+
+One thing I would add: four of the five are things the agent obeys. AGENTS.md and skill files are instructions, an MCP server holds your credentials, an agent card is a stranger describing itself. Review them like code.
+
+My notes on IBM Technology's video, with a diagram for each term:
+https://constantine2nd.github.io/five-terms-under-the-hood-of-an-ai-agent/
+
+#AI #AIAgents #MCP #SoftwareEngineering
