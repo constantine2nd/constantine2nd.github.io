@@ -9,7 +9,7 @@ cd "$(git rev-parse --show-toplevel)"
 SITE="https://constantine2nd.github.io"
 REPO="constantine2nd/constantine2nd.github.io"
 IMAGE="jekyll/jekyll:4"
-GEMS_VOLUME="claude-preview-gems"   # shared with the preview skill
+GEMS_VOLUME="claude-preview-gems"   # shared with the mms-preview skill
 
 fail() { echo "STOP: $*" >&2; exit 1; }
 

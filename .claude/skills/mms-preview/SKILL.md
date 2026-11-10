@@ -1,5 +1,5 @@
 ---
-name: preview
+name: mms-preview
 description: Run this site locally for a human to review, then remove everything the preview created. Use when the user wants to see a change rendered before it is pushed ("run the site", "preview", "let me look at it"), or after editing a post or layout when a look in the browser would catch what reading the diff cannot.
 ---
 
@@ -14,9 +14,9 @@ description: Run this site locally for a human to review, then remove everything
 
 ## Flow
 
-1. Start it: `bash .claude/skills/preview/preview.sh start`. It prints the URL when the site answers, or the container's last log lines if the build failed.
+1. Start it: `bash .claude/skills/mms-preview/preview.sh start`. It prints the URL when the site answers, or the container's last log lines if the build failed.
 2. Give the user the URL of the page that changed (the `permalink` in `_config.yml` is `:title/`, so a post is at `/<slug>/`), not only the homepage. If browser tools are available, open that page and look at it yourself first, so obvious breakage is fixed before they spend time on it.
 3. Wait for the user to say they are done. Edits made while they review appear on reload (livereload), so keep the preview running between fixes.
-4. When they are done, stop it: `bash .claude/skills/preview/preview.sh stop`. Report the last line it prints (`clean: ...` or what was left). `stop --all` also removes the gems volume; use it only when the user asks to remove everything including the cache.
+4. When they are done, stop it: `bash .claude/skills/mms-preview/preview.sh stop`. Report the last line it prints (`clean: ...` or what was left). `stop --all` also removes the gems volume; use it only when the user asks to remove everything including the cache.
 
 Run `status` when unsure whether a preview is up. Previews started by hand or before this skill existed are not labelled and are not touched by `stop`; if one holds a port or repo you need, name it to the user and ask before removing it.
