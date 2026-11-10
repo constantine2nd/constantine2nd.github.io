@@ -4,6 +4,7 @@ title: "Five terms under the hood of an AI agent"
 date: 2026-11-09 10:00:00 +0100
 description: AGENTS.md, agent skills, MCP, A2A and subagents. What each one is, the problem it solves, and how the five fit together, with a diagram for each. Notes on an IBM Technology video.
 img: five-terms-ai-agent.webp
+hide-cover: true # thumbnail on the homepage only; the same diagram opens the post
 tags: [AI, Agents, MCP, Explainer]
 ---
 
@@ -11,16 +12,17 @@ A coding agent can plan a task, write the code, run the tests and open the pull 
 
 These are my notes on [*5 AI Agent Terms You Need to Know*](https://www.youtube.com/watch?v=k5jYwyhDMxA) by IBM Technology (11 minutes), with a diagram for each term and a few things I would add.
 
-<div class="post-verdict">
-<p class="post-verdict-label">In short</p>
-<p><strong>Two terms shape what the agent knows, two let it reach outside itself, and one handles work too big for a single context.</strong> All five are, in the end, about the same scarce thing: what goes into the model's context window, and when.</p>
-<ul class="post-facts">
-<li><b>AGENTS.md</b> how this project works</li>
-<li><b>Skills</b> how to do a kind of task</li>
-<li><b>MCP</b> agent &rarr; tools and data</li>
-<li><b>A2A</b> agent &rarr; agent</li>
-<li><b>Subagents</b> work that does not fit</li>
-</ul>
+**Two terms shape what the agent knows, two let it reach outside itself, and one handles work too big for a single context.** All five are, in the end, about the same scarce thing: what goes into the model's context window, and when.
+
+<div class="post-term" role="figure" aria-label="In short: the five terms">
+<div class="post-term-bar"><span class="post-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>~/project &nbsp;-&nbsp; agent</div>
+<pre><span class="n">1</span>  <span class="k">AGENTS.md</span>   <span class="c"># how this project works</span>
+<span class="n">2</span>  <span class="k">skills/</span>     <span class="c"># how to do a kind of task</span>
+<span class="n">3</span>  <span class="k">MCP</span>         <span class="c"># agent -&gt; tools and data</span>
+<span class="n">4</span>  <span class="k">A2A</span>         <span class="c"># agent -&gt; agent</span>
+<span class="n">5</span>  <span class="k">subagents</span>   <span class="c"># work that does not fit</span>
+
+<span class="a">-- all five decide what enters the context window</span></pre>
 </div>
 
 <div class="post-chart">
